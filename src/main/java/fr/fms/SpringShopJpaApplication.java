@@ -1,5 +1,7 @@
 package fr.fms;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -55,6 +57,47 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 //		articleRepository.save(new Article("R510","Asus", 600, pc));
 		
 		for(Article article : articleRepository.findByCategoryId((long) 1)) {
+			System.out.println(article);
+		}
+		
+		
+		//exercice 1.2
+//		for(Article article : articleRepository.findById((long) 1)) {
+//			System.out.println(article);
+//		}
+		for(Article article : articleRepository.findByDescription("S10")) {
+			System.out.println(article);
+		}
+		
+		
+		//exercice 1.3
+		for(Article article : articleRepository.findByDescriptionAndBrand("S10", "Samsung")) {
+			System.out.println(article);
+		}
+		
+		//exercice 1.4
+//		 articleRepository.deleteById((long) 4);
+		
+		
+		//exercice 1.5
+		Optional<Article> article1 = articleRepository.findById((long)1);
+		Article existingArticle = article1.get();
+		existingArticle.setDescription("S10");
+		existingArticle.setBrand("Samsung");
+		existingArticle.setPrice(450);
+		articleRepository.save(existingArticle);
+		
+		//exercice 1.6
+		
+		for(Category category : categoryRepository.findByOrderByName()) {
+			System.out.println(category);
+		}
+		for(Category category : categoryRepository.findByOrderByNameDesc()) {
+			System.out.println(category);
+		}
+		
+		//exercice 1.7
+		for(Article article : articleRepository.findByBrandNot("Samsung"))  {
 			System.out.println(article);
 		}
 	}

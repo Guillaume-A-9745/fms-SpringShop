@@ -26,6 +26,7 @@ public class Article implements Serializable{
 		this.description = description;
 		this.brand = brand;
 		this.price = price;
+		this.category = category;
 	}
 	
 	public long getId() {

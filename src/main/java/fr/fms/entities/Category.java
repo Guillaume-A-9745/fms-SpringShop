@@ -25,6 +25,11 @@ public class Category implements Serializable{
 		this.name = name;
 	}
 
+	public Category(String name, Collection<Article> articles) {
+		this.name = name;
+		this.articles = articles;
+	}
+
 	public long getId() {
 		return id;
 	}
@@ -39,5 +44,9 @@ public class Category implements Serializable{
 
 	public void setName(String name) {
 		this.name = name;
+	}
+	@Override
+	public String toString() {
+		return "Catégorie [id = " + id + ", name = " + name + "]";
 	}
 }
