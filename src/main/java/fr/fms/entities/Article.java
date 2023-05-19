@@ -10,6 +10,8 @@ import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Article implements Serializable{
+	
+
 	private static final long serialVersionUID = 1L;
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
@@ -61,8 +63,16 @@ public class Article implements Serializable{
 		this.price = price;
 	}
 	
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
+	}
+	
 	@Override
 	public String toString() {
-		return "Article [id = " + id + ", description = " + description + ", brand = " + brand + ", price = " + price + "]";
+		return "Article [id = " + id + ", description = " + description + ", brand = " + brand + ", price = " + price + ", Category = " + category + "]";
 	}
 }

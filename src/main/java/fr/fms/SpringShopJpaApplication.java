@@ -11,8 +11,10 @@ import fr.fms.dao.ArticleRepository;
 import fr.fms.dao.CategoryRespository;
 import fr.fms.entities.Article;
 import fr.fms.entities.Category;
+import jakarta.transaction.Transactional;
 
 @SpringBootApplication
+@Transactional 
 public class SpringShopJpaApplication implements CommandLineRunner {
 	@Autowired
 	private CategoryRespository categoryRepository;
@@ -80,12 +82,22 @@ public class SpringShopJpaApplication implements CommandLineRunner {
 		
 		
 		//exercice 1.5
-		Optional<Article> article1 = articleRepository.findById((long)1);
-		Article existingArticle = article1.get();
-		existingArticle.setDescription("S10");
-		existingArticle.setBrand("Samsung");
-		existingArticle.setPrice(450);
-		articleRepository.save(existingArticle);
+		Optional<Article> optionalArticle = articleRepository.findById((long)1);
+		if(optionalArticle.isPresent()) {
+			Article existingArticle = optionalArticle.get();
+			existingArticle.setDescription("S10");
+			existingArticle.setBrand("Samsung");
+			existingArticle.setPrice(450);
+			articleRepository.save(existingArticle);
+		} else {
+			System.out.println("L'article n'existe pas");
+		}
+		
+		
+		
+		articleRepository.updateArticle(2, "S9", "Samaung", 400);
+
+		
 		
 		//exercice 1.6
 		

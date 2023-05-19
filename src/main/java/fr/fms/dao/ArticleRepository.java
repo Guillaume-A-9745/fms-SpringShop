@@ -3,6 +3,7 @@ package fr.fms.dao;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -28,5 +29,8 @@ public interface ArticleRepository extends JpaRepository<Article,Long>{
 	public List<Article> findByDescriptionAndBrand(String description, String brand);
 	public List<Article> findByBrandNot(String brand);
 	
-	//exercice 1.7
+	//exercice 1.5
+	@Modifying
+    @Query("UPDATE Article SET description = :newDescription, brand = :newBrand, price = :newPrice WHERE id = :articleId")
+    int updateArticle(@Param("articleId") long articleId, @Param("newDescription") String newDescription, @Param("newBrand") String newBrand, @Param("newPrice") double newPrice);
 }
